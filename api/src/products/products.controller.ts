@@ -16,7 +16,7 @@ export class ProductsController {
 
     @Get(':id')
     getProduct(@Param('id', ParseIntPipe) id:number){
-        console.log(typeof id)
+      //  console.log(typeof id)
         return this.productService.getProduct(id)
     }
     @Post()
