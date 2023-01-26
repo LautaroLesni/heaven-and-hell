@@ -1,0 +1,13 @@
+.outterDIV{
+    border: 1px solid black;
+    width: 300px;
+    height: 350px;
+    background-color: aliceblue;
+    margin: 20px;
+}
+.outterDIV img{
+    width: 100%;
+}
+.outterDIV h4{
+    text-align: center;
+}
