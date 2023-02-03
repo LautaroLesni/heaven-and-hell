@@ -5,6 +5,8 @@ import { Product } from './product.entity';
 import { Category } from 'src/categories/category.entity';
 import { CreateProductDto } from './dto/create-product.dto';
 import { updateProductDto } from './dto/update-product.dto';
+import { findProductByNameDto } from './dto/find-product.dto';
+import { ILike } from "typeorm"
 
 @Injectable()
 export class ProductsService {
@@ -38,6 +40,11 @@ export class ProductsService {
             where: { id: id },
             relations: ['categories']
         },)
+    }
+    getProductbyName(query:any){
+        return this.productRepository.findBy({
+            name:ILike(`%${query.name}%`)
+        })
     }
     deleteProduct(id: number) {
         return this.productRepository.delete({ id })

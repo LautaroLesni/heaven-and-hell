@@ -3,12 +3,12 @@ interface Categories{
     name:string
 }
 interface Products{
-id:number
-name:string
-description:string
-img:string
-createdAt:string
-categories:Categories[]
+id:number | null
+name:string | null
+description:string | null
+img:string | null
+createdAt:string | null
+categories:Categories[] | null
 }
 interface User{
     id:number | null

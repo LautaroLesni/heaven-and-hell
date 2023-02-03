@@ -4,7 +4,7 @@ import CatalogRendered from '../components/Catalog/CatalogRendered';
 
 function Catalog() {
     return (
-      <div className="App">
+      <div className="CatalogDIV">
         <NavBar />
         <CatalogRendered />
       </div>
