@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react'
-import { traerProductosByName, filteredByCategory, filteredByName } from '../../redux/slices/products'
+import {  filteredByCategory, filteredByName } from '../../redux/slices/products'
 import { useCustomDispatch, useCustomSelector } from '../../hooks/hooks';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -22,13 +22,15 @@ const SearchBar = () => {
     const handleChange = (e: any) => {
         setInput({ ...input, [e.target.name]: e.target.value })
     }
-    const handleSelector = (e:any) => {
+    const handleSelector = (e:SelectChangeEvent) => {
         setInput({ ...input, [e.target.name]: e.target.value })
         dispatch(filteredByCategory(e.target.value))
     }
     const handleSubmit = (e: any) => {
+        if (e.key === 'Enter'){
         e.preventDefault();
         dispatch(filteredByName(input))
+        }
     }
     return (
         <motion.div
@@ -41,7 +43,7 @@ const SearchBar = () => {
                 style={{ padding: '10px', display: 'flex', alignItems: 'center'}}
                 noValidate
                 autoComplete="off">
-                <TextField name='name' value={input.name} onChange={handleChange} onKeyDown={e => e.key === 'Enter' && e.preventDefault()} id="filled-basic" label="Busqueda" variant="filled" style={{ backgroundColor: 'white', borderRadius: '10px' }} />
+                <TextField name='name' value={input.name} onChange={handleChange} onKeyDown={handleSubmit} id="filled-basic" label="Busqueda" variant="filled" style={{ backgroundColor: 'white', borderRadius: '10px' }} />
                 <Button variant="contained" style={{ width: '25px', height: '50px', marginLeft: '5px' }} onClick={handleSubmit}>
                     Search
                 </Button>

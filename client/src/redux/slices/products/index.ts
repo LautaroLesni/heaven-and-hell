@@ -8,7 +8,7 @@ type initialProducts = {
     productsReference: Products[] | []
     productsByCategories: Products[] | []
     productsByName: Products[] | []
-    product: Products
+    product: Products | null
 }
 
 const initialState: initialProducts = {
@@ -16,14 +16,7 @@ const initialState: initialProducts = {
     productsReference: [],
     productsByCategories: [],
     productsByName: [],
-    product: {
-        id: null,
-        name: null,
-        description: null,
-        img: null,
-        createdAt: null,
-        categories: null
-    },
+    product: null,
 }
 
 const productSlice = createSlice({

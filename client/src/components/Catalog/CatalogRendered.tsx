@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import s from './CatalogRendered.module.css'
 import { useCustomSelector, useCustomDispatch } from '../../hooks/hooks'
@@ -7,20 +7,34 @@ import { traerProductos } from "../../redux/slices/products";
 import { traerCategorias } from "../../redux/slices/categories";
 import SearchBar from "./SearchBar";
 import { motion } from "framer-motion";
+import BasicPagination from "./Pagination";
 
 function CatalogRendered() {
-    const { products } = useCustomSelector((state) => state.products)
-    const { categories } = useCustomSelector((state) => state.categories)
+    const { products } = useCustomSelector((state)=> state.products)
+    //paginado
+    const [currentPage, setCurrentPage] = useState(1)
+    const [productsPerPage, setProductsPerPage] = useState(6)
+    const indexOfLastProduct = currentPage * productsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+    const currentproducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
+    
     const dispatch = useCustomDispatch()
 
     useEffect(() => {
         if (products?.length === 0) {
             dispatch(traerProductos())
             dispatch(traerCategorias())
+            console.log('traigo data')
         }
-    }, [])
+    }, [currentPage])
 
-    console.log(categories)
+    useEffect(()=>{
+        if(currentPage > Math.ceil(products.length/productsPerPage) && products.length > 0){
+            setCurrentPage(1)
+            console.log('cambio pagina')
+        }
+    },[currentPage, productsPerPage, products.length])
+
     return (
         <div className={s.OutterDIV}>
             <SearchBar />
@@ -29,7 +43,7 @@ function CatalogRendered() {
                 animate={{ opacity:1, y: 0 }}
                 transition={{ delay: 0, stiffness: 0, duration: 0.8 }}
                 viewport={{ once: true }}>
-                {products?.map(product => (
+                {currentproducts?.map(product => (
                     <div key={product.id}>
                         <ProductCard
                             id={product.id}
@@ -41,6 +55,7 @@ function CatalogRendered() {
                     </div>
                 ))}
             </motion.div>
+            <BasicPagination setCurrentPage={(productos:any)=>setCurrentPage(productos)} currentPage={currentPage} productsPerPage={productsPerPage}/>
         </div>
     );
 }
