@@ -16,7 +16,7 @@ const initialState: initialProducts = {
     productsReference: [],
     productsByCategories: [],
     productsByName: [],
-    product: null,
+    product: null!,
 }
 
 const productSlice = createSlice({
@@ -28,6 +28,9 @@ const productSlice = createSlice({
             state.productsReference = action.payload
             state.productsByCategories = action.payload
             state.productsByName = action.payload
+        },
+        setProduct:(state, action:PayloadAction<any>) =>{
+            state.product = action.payload
         },
         setByCategory: (state, action: PayloadAction<any>) => {
             const filteredByName = state.productsByName
@@ -83,12 +86,22 @@ const productSlice = createSlice({
 })
 
 export default productSlice.reducer
-export const { setProducts, setByCategory, setByName } = productSlice.actions
+export const { setProducts,setProduct, setByCategory, setByName } = productSlice.actions
 
 export const traerProductos = (): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
     try {
         const response: AxiosResponse = await axios.get('/products')
         dispatch(setProducts(response.data))
+        return response
+    }
+    catch (error) {
+        return error as AxiosError
+    }
+}
+export const traerProducto = (id:string): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
+    try {
+        const response: AxiosResponse = await axios.get(`/products/${id}`)
+        dispatch(setProduct(response.data))
         return response
     }
     catch (error) {

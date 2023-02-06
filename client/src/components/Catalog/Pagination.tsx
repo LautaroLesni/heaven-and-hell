@@ -23,11 +23,16 @@ function BasicPagination({setCurrentPage, currentPage, productsPerPage }:any,) {
   
     const handlePagination = (e:any,page:any)=>{
         setCurrentPage(page)
+        console.log(e.target.getAttribute("aria-label"))
     }
+/*     function defaultGetAriaLabel(type:any, page:any, selected:any) {
+
+       return `Go to ${currentPage} page`; } */
     return (
         <Stack spacing={2}>
             <ThemeProvider theme={theme}>
             <Pagination 
+/*             getItemAriaLabel={defaultGetAriaLabel} */
             count={Math.ceil(products.length/productsPerPage)} 
             onChange={handlePagination}
             color="primary" style={{marginBottom:'40px', marginTop:'40px'}}size='large'/>
