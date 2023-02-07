@@ -6,7 +6,6 @@ import {TypeOrmModule} from '@nestjs/typeorm'
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ImagesModule } from './images/images.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
     database:"heaven_and_hell",
     entities:[__dirname + '/**/*.entity{.ts,.js}'],
     synchronize:true
-  }), UsersModule, ProductsModule, CategoriesModule, ImagesModule, AuthModule],
+  }), UsersModule, ProductsModule, CategoriesModule, ImagesModule],
   controllers: [AppController],
   providers: [AppService],
 })
