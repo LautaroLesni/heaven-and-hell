@@ -32,7 +32,7 @@ export class ProductsService {
         return this.productRepository.save(newProduct)
     }
    async getProducts() {
-        const products = await this.productRepository.find({relations: ['categories']})
+        const products = await this.productRepository.find({relations: ['categories', 'images']})
         return products
     }
     getProduct(id: number) {
