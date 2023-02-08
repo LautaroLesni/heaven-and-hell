@@ -18,7 +18,7 @@ export class ProductsController {
     }
 
     @Get(':id')
-    getProduct(@Param('id', ParseIntPipe) id: number) {
+    getProduct(@Param('id') id: string) {
         //  console.log(typeof id)
         return this.productService.getProduct(id)
     }
@@ -27,11 +27,11 @@ export class ProductsController {
         return this.productService.createProduct(newProduct)
     }
     @Put(':id')
-    updateProduct(@Param('id', ParseIntPipe) id: number, @Body() updatedData: updateProductDto) {
+    updateProduct(@Param('id') id: string, @Body() updatedData: updateProductDto) {
         return this.productService.updateProduct(id, updatedData)
     }
     @Delete(':id')
-    deleteProduct(@Param('id', ParseIntPipe) id: number) {
+    deleteProduct(@Param('id') id: string) {
         return this.productService.deleteProduct(id)
     }
 }

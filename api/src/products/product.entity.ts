@@ -4,8 +4,8 @@ import { Image } from 'src/images/image.entity'
 
 @Entity({name:'products'})
 export class Product{
-@PrimaryGeneratedColumn()
-id:number
+@PrimaryGeneratedColumn('uuid')
+id:string
 @Column({unique:true})
 name:string
 @Column({default:''})

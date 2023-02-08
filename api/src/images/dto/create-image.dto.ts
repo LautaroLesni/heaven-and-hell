@@ -1,5 +1,5 @@
 export class CreateImageDto {
     url:string
-    idproduct:number
-    imagesID:number[]
+    idproduct:string
+    imagesID:string[]
 }

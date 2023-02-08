@@ -35,7 +35,7 @@ export class ProductsService {
         const products = await this.productRepository.find({relations: ['categories', 'images']})
         return products
     }
-    getProduct(id: number) {
+    getProduct(id: string) {
         return this.productRepository.findOne({
             where: { id: id },
             relations: ['categories']
@@ -46,10 +46,10 @@ export class ProductsService {
             name:ILike(`%${query.name}%`)
         })
     }
-    deleteProduct(id: number) {
+    deleteProduct(id: string) {
         return this.productRepository.delete({ id })
     }
-    async updateProduct(id: number, updatedProduct: updateProductDto) {
+    async updateProduct(id: string, updatedProduct: updateProductDto) {
         const foundProduct = await this.productRepository.findOneBy({ id })
         foundProduct.name = updatedProduct.name
         foundProduct.description = updatedProduct.description

@@ -23,17 +23,17 @@ export class CategoriesService {
     return this.categoryRepository.find();
   }
 
-  getCategory(id: number) {
+  getCategory(id: string) {
     return this.categoryRepository.findOne({where:{id: id},relations:['products']})
   }
 
-  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     const categoryFound = await this.categoryRepository.findOne({where:{id:id}})
     categoryFound.name = updateCategoryDto.name
     return this.categoryRepository.save(categoryFound)
   }
 
-  deleteCategory(id: number) {
+  deleteCategory(id: string) {
     return this.categoryRepository.delete({id: id})
   }
 }
