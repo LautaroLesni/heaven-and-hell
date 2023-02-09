@@ -6,12 +6,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { hash, compare } from 'bcrypt';
 import { HttpException } from '@nestjs/common/exceptions';
+import { JwtService } from '@nestjs/jwt'
+
 
 
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
+    constructor(@InjectRepository(User) private userRepository: Repository<User>,
+    private jwtService: JwtService) { }
     async createUser(user: CreateUserDto) {
         const rawPassword = user.password // raw password from body input
         const plainToHash = await hash(rawPassword, 10) // function that hashes password into a complex one
@@ -35,6 +38,12 @@ export class UsersService {
         if (!checkPassword){
             return new HttpException('Incorrect Password',403)
         }
-        return findUser
+        const payload = {id:findUser.id, username: findUser.username, email: findUser.email}
+        const token = this.jwtService.sign(payload)
+        const data = {
+            user:findUser,
+            token:token
+        }
+        return data
     }
 }
