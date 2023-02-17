@@ -1,19 +1,19 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
-import DashboardHome from '../components/DashboardHome/DashboardHome';
 import DashboardNavbar from '../components/DashboardNavbar/DashboardNavbar';
+import './Dashboard.css'
 
-function Dashboard() {
+
+function DashboardCategories() {
     return (
-      <div className="App">
+      <div>
         <NavBar />
         <div className='orientarDashboard'>
         <DashboardNavbar />
-        <DashboardHome />
+        <h1>DashboardCategories</h1>
         </div>
       </div>
     );
   }
   
-  export default Dashboard;
-  
+  export default DashboardCategories;

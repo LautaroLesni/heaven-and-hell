@@ -1,0 +1,9 @@
+.orientarDashboard{
+    display: flex;
+    flex-direction: row;
+}
+@media screen and (max-width: 1040px) {
+    .orientarDashboard{
+        flex-direction: column;
+    }
+}
