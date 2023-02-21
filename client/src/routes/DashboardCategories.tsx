@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
 import DashboardNavbar from '../components/DashboardNavbar/DashboardNavbar';
+import CategoriesTable from '../components/DashboardCategories/CategoriesTable';
 import './Dashboard.css'
 
 
@@ -10,7 +11,7 @@ function DashboardCategories() {
         <NavBar />
         <div className='orientarDashboard'>
         <DashboardNavbar />
-        <h1>DashboardCategories</h1>
+        <CategoriesTable/>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
 import DashboardNavbar from '../components/DashboardNavbar/DashboardNavbar';
+import ProductsTable from '../components/DashboardProducts/ProductsTable';
 
 function DashboardProducts() {
     return (
@@ -8,7 +9,7 @@ function DashboardProducts() {
         <NavBar />
         <div className='orientarDashboard'>
         <DashboardNavbar />
-        <h1>DashboardProducts</h1>
+        <ProductsTable/>
         </div>
       </div>
     );

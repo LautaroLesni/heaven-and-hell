@@ -41,6 +41,7 @@ export class UsersService {
         const payload = {id:findUser.id, username: findUser.username, email: findUser.email}
         const token = this.jwtService.sign(payload)
         const data = {
+            status:200,
             user:findUser,
             token:token
         }
