@@ -19,9 +19,9 @@ import s from './ProductsTable.module.css'
 import { useCustomSelector, useCustomDispatch } from "../../hooks/hooks";
 import { useEffect } from "react";
 import TableFooter from '@mui/material/TableFooter';
-import { traerProductos } from "../../redux/slices/products";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { traerProductos } from "../../redux/slices/products"
+import ProductsModalDelete from "./ProductsModalDelete";
+import ProductsModalEdit from "./ProductsModalEdit";
 
 interface TablePaginationActionsProps {
     count: number;
@@ -178,8 +178,21 @@ const ProductsTable = () =>{
                     <a href={products.img} target='_blank' rel="noreferrer noopener">{products.img.slice(0,30)}</a>
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  <EditIcon style={{margin:'5px', cursor:'pointer'}}/>
-                  <DeleteIcon style={{margin:'5px', cursor:'pointer'}}/>
+                  <div style={{display:'flex'}}>
+                <ProductsModalEdit
+                id={products.id} 
+                name={products.name} 
+                description={products.description} 
+                img={products.img}
+                height={products.height}
+                width={products.width}
+                weigth={products.weigth}
+                materials={products.materials}
+                categorias={products.categories}
+                />
+                  <ProductsModalDelete
+                  id={products.id.toString()}/>
+                  </div>
                 </StyledTableCell>
               </StyledTableRow>
             ))}

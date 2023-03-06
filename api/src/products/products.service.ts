@@ -21,15 +21,21 @@ export class ProductsService {
         newProduct.name = product.name
         newProduct.description = product.description
         newProduct.img = product.img
-        if (product.categories) {
+        newProduct.height = product.height
+        newProduct.width = product.width
+        newProduct.materials = product.materials
+        newProduct.weigth = product.weigth
+        if (product.categories.length > 0) {
             const categoriesIds = product.categories
             const categories = await this.categoryRepository.findBy({
                 id: In(categoriesIds)
             })
             newProduct.categories = categories
         }
-
-        return this.productRepository.save(newProduct)
+        await this.productRepository.save(newProduct)
+        //Para refrescar la base de datos y mostrar la información nueva
+        const products = await this.productRepository.find({relations: ['categories', 'images']})
+        return products
     }
    async getProducts() {
         const products = await this.productRepository.find({relations: ['categories', 'images']})
@@ -46,19 +52,30 @@ export class ProductsService {
             name:ILike(`%${query.name}%`)
         })
     }
-    deleteProduct(id: string) {
-        return this.productRepository.delete({ id })
+   async deleteProduct(id: string) {
+    const foundProduct = await this.productRepository.findOneBy({ id })
+        foundProduct.categories = []
+        await this.productRepository.save(foundProduct)
+    
+      await this.productRepository.delete({ id })
+      const products = await this.productRepository.find({relations: ['categories', 'images']})
+      return products
     }
     async updateProduct(id: string, updatedProduct: updateProductDto) {
         const foundProduct = await this.productRepository.findOneBy({ id })
         foundProduct.name = updatedProduct.name
         foundProduct.description = updatedProduct.description
         foundProduct.img = updatedProduct.img
-        if (updatedProduct.categories) {
+        foundProduct.height = updatedProduct.height
+        foundProduct.width = updatedProduct.width
+        foundProduct.materials = updatedProduct.materials
+        foundProduct.weigth = updatedProduct.weigth
             const foundCategories = await this.categoryRepository.findBy({ id: In(updatedProduct.categories) })
             foundProduct.categories = foundCategories
-        }
-
-        return this.productRepository.save(foundProduct)
+        
+        await this.productRepository.save(foundProduct)
+        //Para refrescar la base de datos y mostrar la información nueva
+        const products = await this.productRepository.find({relations: ['categories', 'images']})
+        return products
     }
 }

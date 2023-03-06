@@ -20,8 +20,9 @@ import { useEffect } from "react";
 import { traerCategorias } from "../../redux/slices/categories";
 import TablePagination from '@mui/material/TablePagination';
 import TableFooter from '@mui/material/TableFooter';
-import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import CategoriesModalDelete from "./CategoriesModalDelete";
+import CategoriesModalEdit from "./CategoriesModalEdit";
 
 interface TablePaginationActionsProps {
   count: number;
@@ -155,6 +156,7 @@ const CategoriesTable = () =>{
           <StyledTableRow>
             <StyledTableCell>ID</StyledTableCell>
             <StyledTableCell className={s.tableCell}>Name</StyledTableCell>
+            <StyledTableCell className={s.tableCell} align='left'>Productos</StyledTableCell>
             <StyledTableCell className={s.tableCell}>Edicion</StyledTableCell>
           </StyledTableRow>
         </TableHead>
@@ -171,8 +173,14 @@ const CategoriesTable = () =>{
                 {categories.name.length > 20 ? `${categories.name.slice(0,20)}...` : `${categories.name}`}
               </StyledTableCell>
               <StyledTableCell align="left">
-                <EditIcon style={{margin:'5px', cursor:'pointer'}}/>
-                <DeleteIcon style={{margin:'5px', cursor:'pointer'}}/>
+                <h4>{categories.products?.length}</h4>
+              </StyledTableCell>
+              <StyledTableCell align="left" style={{display:'flex', flexDirection:'row'}}>
+                <CategoriesModalEdit 
+                id={categories.id}
+                name={categories.name}/>
+                <CategoriesModalDelete
+                id={categories.id}/>
               </StyledTableCell>
             </StyledTableRow>
           ))}

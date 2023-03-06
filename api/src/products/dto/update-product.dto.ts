@@ -2,5 +2,9 @@ export class updateProductDto {
     name?:string
     description?:string
     img?:string
-    categories?:number[]
+    height?:string
+    width?:string
+    weigth?:string
+    materials?:string
+    categories?:string[]
 }

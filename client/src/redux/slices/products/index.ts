@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Thunk } from '../../store'
 import axios from '../../../utils/axiosconfig'
 import { AxiosResponse, AxiosError } from 'axios'
+import { setToken } from "../user";
+
+
 
 type initialProducts = {
     products: Products[] | []
@@ -115,6 +118,48 @@ export const traerProductosByName = (info: any): Thunk => async (dispatch): Prom
         return response
     }
     catch (error) {
+        return error as AxiosError
+    }
+}
+export const createProduct = (product: any, token:string): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
+    try {
+        const response: AxiosResponse = await axios.post(`/products`,product,{headers:{Authorization:'Bearer ' + token}})
+        dispatch(setProducts(response.data)) 
+        console.log(response.data)
+        return response
+    }
+    catch (error:any) {
+        if (error.response.status === 401){
+            dispatch(setToken(''))
+        }
+        return error as AxiosError
+    }
+}
+
+export const updateProduct = (product: any, token:string, id:string): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
+    try {
+        const response: AxiosResponse = await axios.put(`/products/${id}`,product,{headers:{Authorization:'Bearer ' + token}})
+        dispatch(setProducts(response.data)) 
+        console.log(response.data)
+        return response
+    }
+    catch (error:any) {
+        if (error.response.status === 401){
+            dispatch(setToken(''))
+        }
+        return error as AxiosError
+    }
+}
+export const deleteProduct = (token:string, id:string): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
+    try {
+        const response: AxiosResponse = await axios.delete(`/products/${id}`,{headers:{Authorization:'Bearer ' + token}})
+        dispatch(setProducts(response.data)) 
+        return response
+    }
+    catch (error:any) {
+        if (error.response.status === 401){
+            dispatch(setToken(''))
+        }
         return error as AxiosError
     }
 }

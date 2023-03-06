@@ -6,13 +6,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { traerCategorias } from '../../redux/slices/categories';
-import { updateProduct } from '../../redux/slices/products';
-import EditIcon from '@mui/icons-material/Edit';
+import { createProduct } from '../../redux/slices/products';
 import s from './ProductsModalCreate.module.css'
 
 /* img,description,height,width,weight,materials,categories */
@@ -26,25 +26,25 @@ interface CreateForm {
     materials: string
     categories: Categories[]
 }
+const initialState: CreateForm = {
+    name: '',
+    description: '',
+    img: '',
+    height: '',
+    width: '',
+    weigth: '',
+    materials: '',
+    categories: []
+}
 
-const ProductsModalEdit = ({id,name,description,img,height,width,weigth,materials,categorias}:any) =>{
-    const initialState: CreateForm = {
-        name,
-        description,
-        img,
-        height,
-        width,
-        weigth,
-        materials,
-        categories: categorias
-    }
+const ProductsModalCreate = () => {
     const { categories } = useCustomSelector((state) => state.categories)
     const { token } = useCustomSelector((state) => state.user)
     const dispatch = useCustomDispatch()
     const [edit, setModal] = useState(false);
     const [input, setInput] = useState(initialState)
-    const handleEditOpen = () => setModal(true);
-    const handleEditlClose = () => setModal(false);
+    const handleModalOpen = () => setModal(true);
+    const handleModalClose = () => setModal(false);
     const handleChange = (e: any) => {
         setInput({
             ...input,
@@ -59,10 +59,10 @@ const ProductsModalEdit = ({id,name,description,img,height,width,weigth,material
             const finalForm = input
             input.categories.map(cat => categoriesid.push(cat.id.toString()))
             finalForm.categories = categoriesid
-            dispatch(updateProduct(finalForm, token, id))
+            dispatch(createProduct(finalForm, token))
         }
         else if (input.categories.length === 0){
-            dispatch(updateProduct(input, token, id))
+            dispatch(createProduct(input, token))
         }
         setInput(initialState)
         setModal(false)
@@ -133,27 +133,41 @@ const ProductsModalEdit = ({id,name,description,img,height,width,weigth,material
         marginBottom: '5px'
     }
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                // Purple and green play nicely together.
+                main: '#b6a481',
+            },
+            secondary: {
+                // This is green.A700 as hex.
+                main: '#044a21',
+            },
+        },
+    });
+
     useEffect(() => {
         if (categories!.length === 0) {
             dispatch(traerCategorias())
         }
     }, [])
     return (
-    <div>
-     <EditIcon onClick={handleEditOpen} style={{margin:'5px', cursor:'pointer'}}/>
-     <Modal
+        <div>
+            <ThemeProvider theme={theme}>
+                <Button onClick={handleModalOpen} style={{ marginTop: 10, color: 'white' }} type='submit' variant='contained' color='primary'>Crear producto</Button>
+                <Modal
                     style={{ overflow: 'scroll' }}
                     open={edit}
-                    onClose={handleEditlClose}
+                    onClose={handleModalClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
                     <Box sx={outterBox}>
                         <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Edita tu producto!
+                            Crea tu producto!
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Para poder editar tu producto debes cambiar los valores y presionar el botón "Guardar"
+                            Para poder crear tu producto debes rellenar los valores necesarios y presionar el botón "Crear"
                         </Typography>
                         <TextField style={{ marginTop: 20 }} id="outlined-basic" label="Nombre" required variant="outlined" name='name' value={input.name} onChange={handleChange} />
                         <TextField style={{ marginTop: 10, width: '100%' }} id="filled-multiline-static" label="Descripción" multiline rows={7} variant="filled" name='description' value={input.description} onChange={handleChange} />
@@ -192,10 +206,11 @@ const ProductsModalEdit = ({id,name,description,img,height,width,weigth,material
                                 ))}
                             </Select>
                         </FormControl>
-                        <Button style={{ marginTop: 20, color: 'white', width:'100px' }} type='submit' variant='contained' color='primary' onClick={handleSubmit}>Guardar</Button>
+                        <Button style={{ marginTop: 20, color: 'white' }} type='submit' variant='contained' color='primary' onClick={handleSubmit}>Crear</Button>
                     </Box>
                 </Modal>
-    </div>)
+            </ThemeProvider>
+        </div>)
 }
 
-export default ProductsModalEdit
+export default ProductsModalCreate

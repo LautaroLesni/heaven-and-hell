@@ -13,14 +13,15 @@ export class CategoriesService {
     @InjectRepository(Product) private productyRepository: Repository<Product>
     ) {}
 
-  createCategory(categoria: CreateCategoryDto) {
+  async createCategory(categoria: CreateCategoryDto) {
     const newCategory = new Category()
     newCategory.name = categoria.name
-    return this.categoryRepository.save(newCategory)
+    await this.categoryRepository.save(newCategory)
+    return this.categoryRepository.find({relations: ['products']});
   }
 
   getCategories() {
-    return this.categoryRepository.find();
+    return this.categoryRepository.find({relations: ['products']});
   }
 
   getCategory(id: string) {
@@ -30,10 +31,15 @@ export class CategoriesService {
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {
     const categoryFound = await this.categoryRepository.findOne({where:{id:id}})
     categoryFound.name = updateCategoryDto.name
-    return this.categoryRepository.save(categoryFound)
+    await this.categoryRepository.save(categoryFound)
+    return this.categoryRepository.find({relations: ['products']});
   }
 
-  deleteCategory(id: string) {
-    return this.categoryRepository.delete({id: id})
+  async deleteCategory(id: string) {
+    const foundCategory = await this.categoryRepository.findOne({where:{id: id}})
+    foundCategory.products = []
+    await this.categoryRepository.save(foundCategory)
+    await this.categoryRepository.delete({id: id})
+    return this.categoryRepository.find({relations: ['products']});
   }
 }
