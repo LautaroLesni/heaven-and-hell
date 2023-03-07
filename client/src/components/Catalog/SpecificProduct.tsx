@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useCustomDispatch, useCustomSelector } from "../../hooks/hooks";
 import { traerProducto, setProduct } from "../../redux/slices/products";
 import s from './SpecificProduct.module.css'
+import { Link } from "react-router-dom";
 
 const SpecificProduct = () => {
     const { id } = useParams()
@@ -27,6 +28,8 @@ const SpecificProduct = () => {
             <NavBar />
             <div className={s.OutterDiv}>
                 <div className={s.SpecificOutterDIV}>
+                <div className={s.SpecificDIV}>
+                <Link to={'/products'}>Atras</Link>
                     {product ? 
                     <div className={s.SpecificInnerDIV}>
                         <div className={s.imgDIV}>
@@ -39,6 +42,7 @@ const SpecificProduct = () => {
                         
                     </div> 
                     : 'Loading'}
+                </div>
                 </div>
             </div>
         </div>)

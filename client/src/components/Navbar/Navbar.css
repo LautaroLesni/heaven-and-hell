@@ -1,7 +1,9 @@
 .nav-menu {
     display: flex;
     align-items: center;
-    position: sticky
+    position: sticky;
+    justify-content: space-around;
+    width: 35%;
 }
 
 .nav-menu li {
@@ -9,10 +11,25 @@
 }
 
 .nav-menu li a {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     color: rgb(101, 7, 7);
     transition: 0.3s;
+}
+.nav-menu li a h4{
+    font-family: 'Bebas Neue', cursive;
+}
+.nav-menu li a h4::after{
+    content: "";
+    width: 0%;
+    height: 1px;
+    background-color:rgb(215, 19, 19);
+    display:block;
+    margin:auto;
+    transition: 0.5s;
+}
+.nav-menu li a h4:hover::after{
+    width: 100%;
 }
 
 .nav-menu li a:hover {
