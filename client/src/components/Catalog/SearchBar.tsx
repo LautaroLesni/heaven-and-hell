@@ -30,12 +30,11 @@ const SearchBar = () => {
         if (e.key === 'Enter'){
         e.preventDefault();
         dispatch(filteredByName(input))
+        console.log(e.type)
     }
-    }
-
-    const handleSubmitClick = (e:any)=>{
-        e.preventDefault();
+    if (e.type === 'click'){
         dispatch(filteredByName(input))
+    }
     }
     return (
         <motion.div
@@ -65,7 +64,7 @@ const SearchBar = () => {
                     </Select>
                 </FormControl>
                 <TextField name='name' value={input.name} onChange={handleChange} onKeyDown={handleSubmit} id="filled-basic" label="Busqueda" variant="filled" size="medium" style={{ backgroundColor: 'white', borderRadius: '10px' }} />
-                <Button variant="contained" style={{ width: '25px', height: '45px', marginLeft: '5px', backgroundColor:'#500505' }} onClick={handleSubmitClick}>
+                <Button variant="contained" style={{ width: '25px', height: '45px', marginLeft: '5px', backgroundColor:'#500505' }} onClick={handleSubmit}>
                     Search
                 </Button>
             </Box>
