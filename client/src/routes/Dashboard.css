@@ -10,8 +10,21 @@
     flex-direction: column;
     background-color: white;
 }
+.CatalogDIV{
+    background-size: contain;
+    background-repeat:round;
+    width: 100%;
+    height: 120vh;
+}
 @media screen and (max-width: 1040px) {
     .orientarDashboard{
         flex-direction: column;
+    }
+    .CatalogDIV{
+        background-image: url(https://preview.redd.it/l5mssx5g7q961.jpg?auto=webp&s=e25a932209589df7d3af852bd83b4aa5f7f1a777);
+        background-size:cover;
+        background-repeat:repeat;
+        width: 100%;
+        height: 100%;
     }
 }
