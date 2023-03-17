@@ -9,6 +9,7 @@ import ProtectedAdmin from './components/AdminProtector/ProtectedRoute';
 import IsLogged from './components/AdminProtector/IsLogged';
 import DashboardCategories from './routes/DashboardCategories';
 import DashboardProducts from './routes/DashboardProducts';
+import DashboardRedirect from './components/AdminProtector/DashboardRedirect';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/products' element={<Catalog />}></Route>
         <Route path='/products/:id' element={<SpecificProduct />}></Route>
+        <Route path='/dashboard' element={<DashboardRedirect></DashboardRedirect>}></Route>
         <Route path='/dashboard/home' element={<ProtectedAdmin><Dashboard /></ProtectedAdmin>}></Route>
         <Route path='/dashboard/products' element={<ProtectedAdmin><DashboardProducts /></ProtectedAdmin>}></Route>
         <Route path='/dashboard/categories' element={<ProtectedAdmin><DashboardCategories /></ProtectedAdmin>}></Route>
