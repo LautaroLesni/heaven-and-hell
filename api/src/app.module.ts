@@ -6,15 +6,18 @@ import {TypeOrmModule} from '@nestjs/typeorm'
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ImagesModule } from './images/images.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
     type:"postgres",
-    host:"localhost",
-    port:5432,
-    username:"postgres",
-    password:"postgres",
-    database:"heaven_and_hell",
+    host:process.env.DATABASE_HOST,
+    port:parseInt(process.env.DATABASE_PORT),
+    username:process.env.DATABASE_USER,
+    password:process.env.DATABASE_PASSWORD,
+    database:process.env.DATABASE_NAME,
     entities:[__dirname + '/**/*.entity{.ts,.js}'],
     synchronize:true
   }), UsersModule, ProductsModule, CategoriesModule, ImagesModule],
@@ -22,3 +25,4 @@ import { ImagesModule } from './images/images.module';
   providers: [AppService],
 })
 export class AppModule {}
+
