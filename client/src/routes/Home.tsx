@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
+import Caroussel from '../components/Carousel/Carousel'
 
 /* initial={{ y: -100 }}
 animate={{ y: 0 }}
@@ -13,7 +14,7 @@ function Home() {
       <motion.div>
         <NavBar />
       </motion.div>
-      <h1>Home</h1>
+      <Caroussel />
     </div>
   );
 }

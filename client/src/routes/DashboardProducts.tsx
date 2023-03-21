@@ -11,8 +11,10 @@ function DashboardProducts() {
         <div className='orientarDashboard'>
         <DashboardNavbar />
         <div className='orientarDashboardStuff'>
+          <div className='RightsideDashboard'>
           <ProductsModalCreate />
         <ProductsTable />
+          </div>
         </div>
         </div>
       </div>
