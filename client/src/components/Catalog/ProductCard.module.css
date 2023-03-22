@@ -41,8 +41,6 @@
     margin-top: 20px;
 }
 
-
-
 .seemore {
     color: white;
     background-color: black;
@@ -68,4 +66,37 @@
 
 .productName a:hover {
     text-decoration: underline;
+}
+@media screen and (max-width: 1040px) {
+    .outterDIV{
+        width: 250px;
+        height: 375px;
+        margin: 15px 10px;
+    }
+    .imgDIV{
+        height: 350px;
+    }
+    .textDIV{
+        height: 175px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .outterDIV{
+        width: 205px;
+        height: 375px;
+        margin: 15px 0px;
+    }
+}
+@media screen and (max-width: 400px) {
+    .outterDIV{
+        width: 180px;
+        height: 375px;
+        margin: 15px 0px;
+    }
+    .imgDIV{
+        height: 350px;
+    }
+    .textDIV{
+        height: 175px;
+    }
 }

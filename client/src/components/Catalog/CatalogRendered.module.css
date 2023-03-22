@@ -7,7 +7,7 @@ flex-direction: column;
 }
 .catalogDIV{
     display: flex;
-    width:60%;
+    width:70%;
     height: 100%;
     flex-direction: row;
     justify-content: space-around;
@@ -15,6 +15,11 @@ flex-direction: column;
 }
 @media screen and (max-width: 1040px) {
     .catalogDIV{
-        width: 85%;
+        width: 95%;
     }
+}
+@media screen and (max-width: 1040px) {
+    .catalogDIV{
+        width: 100%;
+    }  
 }

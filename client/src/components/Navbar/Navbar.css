@@ -18,6 +18,7 @@
 }
 .nav-menu li a h4{
     font-family: 'Bebas Neue', cursive;
+    text-align: center;
 }
 .nav-menu li a h4::after{
     content: "";
@@ -46,6 +47,7 @@
 }
 
 .logoutbutton {
+    font-family: 'Bebas Neue', cursive;
     font-size: 1.2rem;
     font-weight: 700;
     color: rgb(207, 193, 116);
@@ -119,6 +121,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@media screen and (max-width: 1400px) {
+    .nav-menu{
+        width: 50%;
+    }
 }
 @media screen and (max-width: 1040px) {
     .heavenlogo{
