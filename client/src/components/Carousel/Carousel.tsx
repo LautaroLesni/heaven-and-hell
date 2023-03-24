@@ -8,14 +8,14 @@ import s from './Item.module.css'
 function Caroussel() {
     var items = [
         {
-            name: "Random Name #4",
-            description: "Hello World!",
-            img: "https://wallpapercave.com/wp/wp2892028.png"
-        },
-        {
             name: "Random Name #1",
             description: "Probably the most random thing you have ever seen!",
             img: "https://wallpaperset.com/w/full/5/b/f/57615.jpg"
+        },
+        {
+            name: "Random Name #4",
+            description: "Hello World!",
+            img: "https://i.pinimg.com/originals/2a/f1/ae/2af1aed005e4433f76a396344ef3971c.jpg"
         },
         {
             name: "Random Name #2",
@@ -34,8 +34,9 @@ function Caroussel() {
             <Carousel
                 indicatorIconButtonProps={{
                     style: {
+                        display:'none',
                         padding: '5px',    // 1
-                        color: 'rgb(0,0,0)'       // 3
+                        color: 'gray'       // 3
                     }
                 }}
                 activeIndicatorIconButtonProps={{

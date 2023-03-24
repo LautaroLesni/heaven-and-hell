@@ -1,0 +1,36 @@
+.outterDIV{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.propositoDIV{
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.propositoDIV h3{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 45px;
+    color: white;
+}
+.propositoDIV p{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 25px;
+    color: white;   
+    width: 60%;
+}
+.alignBars{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.barra{
+    width: 40px;
+    height: 2px;
+    background: rgb(255, 255, 255);
+    color: white;
+}
