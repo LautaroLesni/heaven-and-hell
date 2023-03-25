@@ -16,6 +16,10 @@ export class ImagesController {
   findAll() {
     return this.imagesService.getImages();
   }
+  @Get('/s3/')
+  getUploadURL() {
+    return this.imagesService.getImageURL();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

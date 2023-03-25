@@ -5,6 +5,7 @@ import { Repository, In } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Product } from 'src/products/product.entity';
 import { Image } from './image.entity';
+import { generateUploadURL } from 'src/s3/s3';
 
 @Injectable()
 export class ImagesService {
@@ -35,6 +36,10 @@ export class ImagesService {
   async getImages() {
     const images = await this.imageRepository.find({relations: ['product']})
     return images
+  }
+  async getImageURL() {
+    const url = await generateUploadURL()
+    return {url}
   }
 
   findOne(id: number) {

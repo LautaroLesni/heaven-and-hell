@@ -14,6 +14,10 @@ import FormControl from '@mui/material/FormControl';
 import { traerCategorias } from '../../redux/slices/categories';
 import { createProduct } from '../../redux/slices/products';
 import s from './ProductsModalCreate.module.css'
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import axios from '../../utils/axiosconfig'
+
 
 /* img,description,height,width,weight,materials,categories */
 interface CreateForm {
@@ -26,6 +30,7 @@ interface CreateForm {
     materials: string
     categories: Categories[]
 }
+
 const initialState: CreateForm = {
     name: '',
     description: '',
@@ -37,14 +42,21 @@ const initialState: CreateForm = {
     categories: []
 }
 
+
 const ProductsModalCreate = () => {
     const { categories } = useCustomSelector((state) => state.categories)
     const { token } = useCustomSelector((state) => state.user)
     const dispatch = useCustomDispatch()
     const [edit, setModal] = useState(false);
     const [input, setInput] = useState(initialState)
+    const [imageInput, setImageInput] = useState<HTMLInputElement["files"] | null>(null)
+    const [imagePreview, setImagePreview] = useState<string | null>(null)
     const handleModalOpen = () => setModal(true);
-    const handleModalClose = () => setModal(false);
+    const handleModalClose = () => {
+        setModal(false);
+        setImagePreview(null)
+        setImageInput(null)
+    }
     const handleChange = (e: any) => {
         setInput({
             ...input,
@@ -52,17 +64,25 @@ const ProductsModalCreate = () => {
         })
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async(e: any) => {
         e.preventDefault()
-        if (input.categories.length > 0){
-            const categoriesid:any = []
-            const finalForm = input
+        let finalInput = input
+        if (imageInput){
+            const { data }  = await axios.get('images/s3')  // data es la url segura generada por el backend que nos permite subir la imagen a S3
+            console.log(data.url)
+            await axios.put(data.url,imageInput[0],{headers:{"Content-Type":"multipart/form-data"}})
+            const imageURL = data.url.split("?")[0]
+            finalInput.img = imageURL
+            console.log('Imagen subida')
+             }
+        if (input.categories.length > 0) {
+            const categoriesid: any = []
             input.categories.map(cat => categoriesid.push(cat.id.toString()))
-            finalForm.categories = categoriesid
-            dispatch(createProduct(finalForm, token))
+            finalInput.categories = categoriesid
+            dispatch(createProduct(finalInput, token))
         }
-        else if (input.categories.length === 0){
-            dispatch(createProduct(input, token))
+        else if (input.categories.length === 0) {
+            dispatch(createProduct(finalInput, token))
         }
         setInput(initialState)
         setModal(false)
@@ -82,11 +102,31 @@ const ProductsModalCreate = () => {
         }
 
     }
-    const DeleteCategory = (e:any) => {
+    const DeleteCategory = (e: any) => {
         e.preventDefault()
         setInput((prevState) => ({
             ...prevState, categories: input.categories.filter(cat => cat.name !== e.target.name)
         }))
+    }
+
+    const selectImage = (e:any)=>{
+        if (e.target.files.length > 0){
+        setImageInput(e.target.files!)
+        const previewURL = URL.createObjectURL(e.target.files[0])
+        setImagePreview(previewURL)
+        }
+    }
+
+    const uploadImage = async() =>{
+        if (imageInput){
+       const { data }  = await axios.get('images/s3')  // data es la url segura generada por el backend que nos permite subir la imagen a S3
+       console.log(data.url)
+       await axios.put(data.url,imageInput[0],{headers:{"Content-Type":"multipart/form-data"}})
+       const imageURL = data.url.split("?")[0]
+       setInput((prevState) => ({
+        ...prevState, img: imageURL
+    }))
+        }
     }
 
 
@@ -129,7 +169,7 @@ const ProductsModalCreate = () => {
         marginTop: '20px',
         height: '60px',
         width: '100%',
-        alignItems:'center',
+        alignItems: 'center',
         marginBottom: '5px'
     }
 
@@ -171,7 +211,23 @@ const ProductsModalCreate = () => {
                         </Typography>
                         <TextField style={{ marginTop: 20 }} id="outlined-basic" label="Nombre" required variant="outlined" name='name' value={input.name} onChange={handleChange} />
                         <TextField style={{ marginTop: 10, width: '100%' }} id="filled-multiline-static" label="Descripción" multiline rows={7} variant="filled" name='description' value={input.description} onChange={handleChange} />
-                        <TextField style={{ marginTop: 10, width: '100%' }} id="filled-multiline-static" label="Imagen" variant="outlined" name='img' value={input.img} onChange={handleChange} />
+                        <Box sx={{display:'flex', alignItems:'center', justifyContent:'space-around', marginTop:'10px', border:'1px solid gray', borderRadius:'10px', height:'100px'}}>
+                            <Box sx={{display:'flex', flexDirection:'column'}}>
+                        <IconButton color="primary" aria-label="upload picture" component="label">
+                            <input hidden accept="image/*" type="file" onChange={selectImage}/>
+                            <PhotoCamera />
+                        </IconButton>
+                        <Button component="label">
+                                Subir Imagen
+                                <input hidden accept="image/*" multiple type="file" onChange={selectImage} />
+                            </Button>
+                        </Box>
+                        <Box sx={{display:'flex', justifyContent:'center',alignItems:'center',height:'100px', width:'100px'}}>
+                              {imagePreview ? 
+                              <img style={{objectFit:'cover',overflow:'hidden', border:'1px solid black', borderRadius:'5px', padding:'2px', justifyContent:'center', alignContent:'center',height:'100px', width:'100%'}} src={imagePreview}/>
+                               : input.img ? 
+                               <img style={{objectFit:'cover',overflow:'hidden', border:'1px solid black', borderRadius:'5px', padding:'2px', justifyContent:'center', alignContent:'center',height:'100px', width:'100%'}} src={input.img} /> : null}</Box>                 
+                        </Box>
                         <Box style={innerBox}>
                             <TextField style={{ marginTop: 20 }} id="outlined-basic" label="Altura (cm)" required variant="outlined" name='height' value={input.height} onChange={handleChange} />
                             <TextField style={{ marginTop: 20 }} id="outlined-basic" label="Ancho (cm)" required variant="outlined" name='width' value={input.width} onChange={handleChange} />
@@ -184,8 +240,8 @@ const ProductsModalCreate = () => {
                             <Box style={{ display: 'flex', width: '100%', height: 'fit-content', backgroundColor: '#d9d9d9', flexWrap: 'wrap' }}>
                                 {input.categories.map(cat => (
                                     <div key={cat.id} className={s.categoryname}>
-                                    <h5>{cat.name}</h5>
-                                    <button name={cat.name} className={s.deletebutton} onClick={DeleteCategory}>X</button>
+                                        <h5>{cat.name}</h5>
+                                        <button name={cat.name} className={s.deletebutton} onClick={DeleteCategory}>X</button>
                                     </div>
                                 ))}
                             </Box>
