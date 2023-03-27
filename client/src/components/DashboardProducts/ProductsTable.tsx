@@ -32,6 +32,16 @@ interface TablePaginationActionsProps {
       newPage: number,
     ) => void;
   }
+
+  const displayTables = {
+    display: { 
+    xs: 'none', // 0
+    sm: 'none', // 600
+    md: 'none', // 900
+    lg: 'ruby', // 1200
+    xl: 'table-cell' // 1536}
+  }
+}
   
   function TablePaginationActions(props: TablePaginationActionsProps) {
     const theme = useTheme();
@@ -147,15 +157,15 @@ const ProductsTable = () =>{
       }));
     return (
         <TableContainer component={Paper}
-        style={{display:'flex', flexDirection:'column', alignItems:'center'}}>        
+        style={{display:'flex', flexDirection:'column', alignItems:'center', width:'100%'}}>        
                 <h1 className={s.title}>Products</h1> 
-        <Table sx={{ minWidth: 650 }} aria-label="custom pagination table">
+        <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
           <TableHead>
             <StyledTableRow>
-              <StyledTableCell>ID</StyledTableCell>
-              <StyledTableCell className={s.tableCell}>Name</StyledTableCell>
-              <StyledTableCell className={s.tableCell}>Date</StyledTableCell>
-              <StyledTableCell className={s.tableCell}>IMG</StyledTableCell>
+              <StyledTableCell sx={displayTables}>ID</StyledTableCell>
+              <StyledTableCell className={s.tableCell}>Nombre</StyledTableCell>
+              <StyledTableCell sx={displayTables} className={s.tableCell}>Fecha de creación</StyledTableCell>
+              <StyledTableCell className={s.tableCell}>Imagen</StyledTableCell>
               <StyledTableCell className={s.tableCell}>Edicion</StyledTableCell>
             </StyledTableRow>
           </TableHead>
@@ -165,13 +175,13 @@ const ProductsTable = () =>{
               : products
             ).map((products:any) => (
               <StyledTableRow key={products.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell sx={displayTables} component="th" scope="row">
                   {products.id}
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   {products.name.length > 20 ? `${products.name.slice(0,20)}...` : `${products.name}`}
                 </StyledTableCell>
-                <StyledTableCell align="left">
+                <StyledTableCell sx={displayTables} align="left">
                   {products.createdAt}
                 </StyledTableCell>
                 <StyledTableCell align="left">

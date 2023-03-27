@@ -16,6 +16,9 @@
     width: 100%;
     height: 145vh;
 }
+.RightsideDashboard{
+    width: 100%;
+}
 @media screen and (max-width: 1040px) {
     .orientarDashboard{
         flex-direction: column;

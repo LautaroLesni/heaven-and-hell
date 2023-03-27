@@ -4,7 +4,7 @@ import CatalogRendered from '../components/Catalog/CatalogRendered';
 import bosque from '../utils/bosque.png'
 function Catalog() {
     return (
-      <div className="CatalogDIV" style={{backgroundImage:`url(${bosque})`}}>
+      <div className="CatalogDIV">
         <NavBar />
         <CatalogRendered /> 
       </div>

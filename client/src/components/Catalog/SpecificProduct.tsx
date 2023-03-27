@@ -6,7 +6,7 @@ import { useCustomDispatch, useCustomSelector } from "../../hooks/hooks";
 import { traerProducto, setProduct } from "../../redux/slices/products";
 import s from './SpecificProduct.module.css'
 import { Link } from "react-router-dom";
-import TextField from '@mui/material/TextField';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
@@ -32,7 +32,7 @@ const SpecificProduct = () => {
             <div className={s.OutterDiv}>
                 <div className={s.SpecificOutterDIV}>
                 <div className={s.SpecificDIV}>
-                <Link to={'/products'}>Atras</Link>
+                <Link to={'/products'}><ArrowCircleLeftIcon/></Link>
                     {product ? 
                     <div className={s.SpecificInnerDIV}>
                         <div className={s.imgDIV}>
@@ -40,11 +40,18 @@ const SpecificProduct = () => {
                         </div>
                         <div className={s.Text}>
                         <h1>{product.name}</h1>
-                        <Box sx={{display:'flex', flexDirection:'row'}}>
-                        <TextField name='cantidad'  id="filled-basic" label="Cantidad" variant="filled" size="small" style={{ width:'25%',backgroundColor: 'white', borderRadius: '10px' }}/>
-                        <Button variant="contained" style={{ width:'25%', height: '45px', backgroundColor:'#500505' }}>Consultar</Button>
-                        </Box>
                         <p>{product.description}</p>
+                        <ul>
+                            <li>{}</li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <Box sx={{display:'flex', flexDirection:'row'}}>
+                        <Button variant="contained" style={{ width:'100%', height: '45px', backgroundColor:'#500505' }}>Consultar</Button>
+                        </Box>
                         </div>
                         
                     </div> 
