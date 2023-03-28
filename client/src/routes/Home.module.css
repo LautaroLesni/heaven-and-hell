@@ -1,6 +1,9 @@
 .HomeDIV h2{
     font-family: 'Bebas Neue', cursive;
+    border-top: 2px solid rgb(99, 1, 1);
+    border-bottom: 2px solid rgb(99, 1, 1);
     text-shadow: 40px solid black;
+    background-color: rgb(5, 5, 5);
     color: rgb(99, 1, 1);
     font-size: 60px;
     text-align: center;
