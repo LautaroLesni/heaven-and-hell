@@ -5,6 +5,7 @@ import Caroussel from '../components/Carousel/Carousel'
 import s from './Home.module.css'
 import Proposito from '../components/Home/Proposito';
 import HomeNews from '../components/Home/HomeNews';
+import Footer from '../components/Footer/Footer';
 
 /* initial={{ y: -100 }}
 animate={{ y: 0 }}
@@ -33,6 +34,7 @@ function Home() {
         viewport={{ once: true }}
       >Noticias</motion.h2>
       <HomeNews />
+      <Footer />
     </div>
   );
 }

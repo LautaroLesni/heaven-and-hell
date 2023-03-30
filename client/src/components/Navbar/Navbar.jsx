@@ -27,7 +27,9 @@ const NavBar = () => {
         top: '6px',
         fontSize: 35,
         color: '#5e0505',
+        transition:'0.3s',
         "&:hover": {
+            transition:'0.3s',
             color: '#c21414'
         }
     }
