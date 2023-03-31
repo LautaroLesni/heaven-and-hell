@@ -1,12 +1,13 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
 import CatalogRendered from '../components/Catalog/CatalogRendered';
-import bosque from '../utils/bosque.png'
+import Footer from '../components/Footer/Footer';
 function Catalog() {
     return (
       <div className="CatalogDIV">
         <NavBar />
         <CatalogRendered /> 
+        <Footer/>
       </div>
     );
   }

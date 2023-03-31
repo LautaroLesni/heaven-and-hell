@@ -13,7 +13,7 @@ function CatalogRendered() {
     const { products } = useCustomSelector((state)=> state.products)
     //paginado
     const [currentPage, setCurrentPage] = useState(1)
-    const [productsPerPage, setProductsPerPage] = useState(6)
+    const [productsPerPage, setProductsPerPage] = useState(8)
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     const currentproducts = products.slice(indexOfFirstProduct, indexOfLastProduct)

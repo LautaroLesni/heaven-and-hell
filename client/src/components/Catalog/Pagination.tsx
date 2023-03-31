@@ -29,15 +29,18 @@ function BasicPagination({setCurrentPage, currentPage, productsPerPage }:any,) {
 
        return `Go to ${currentPage} page`; } */
     return (
+    <div>
+
         <Stack spacing={2}>
             <ThemeProvider theme={theme}>
             <Pagination 
 /*             getItemAriaLabel={defaultGetAriaLabel} */
             count={Math.ceil(products.length/productsPerPage)} 
             onChange={handlePagination}
-            color="primary" style={{marginBottom:'40px', marginTop:'40px'}}size='large'/>
+            color="primary" style={{marginTop:'40px'}}size='large'/>
             </ThemeProvider>
         </Stack>
+        </div>
     );
 }
 

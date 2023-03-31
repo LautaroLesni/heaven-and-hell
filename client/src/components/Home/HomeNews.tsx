@@ -1,8 +1,8 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel'
-import { motion } from 'framer-motion';
 import NewsItems from './NewsItems';
 import s from './HomeNews.module.css'
+import { motion } from 'framer-motion';
 
 const CarouselSX = {
     width: {
@@ -51,10 +51,10 @@ function HomeNews() {
 
     return (
         <motion.div className={s.carouselAlign}
-            initial={{ y: 200, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0, stiffness: 0, duration: 1.8 }}
-            viewport={{ once: true }}>
+        initial={{ y: 200, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0, stiffness: 0, duration: 1.8 }}
+        viewport={{ once: true }}>
             <Carousel
                 sx={CarouselSX}
                 indicatorIconButtonProps={{

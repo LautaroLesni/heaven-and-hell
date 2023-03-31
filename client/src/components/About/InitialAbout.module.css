@@ -21,11 +21,18 @@
 .TextDIV{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 70%;
+    background-color: #090909;
     border-left: 1px solid rgb(99, 1, 1);
     border-right: 1px solid rgb(99, 1, 1);
+    border-bottom: 1px solid rgb(99, 1, 1);
+    border-radius: 0px 0px 10px 10px;
+    padding-bottom: 10px;
 }
 .TextDIV p{
+    width: 90%;
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;

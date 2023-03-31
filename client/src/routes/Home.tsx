@@ -29,10 +29,10 @@ function Home() {
       <Proposito />
       <motion.h2
         initial={{ y: 200, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0, stiffness: 0, duration: 1.8 }}
-        viewport={{ once: true }}
-      >Noticias</motion.h2>
+        viewport={{ once: true }}>
+        Noticias</motion.h2>
       <HomeNews />
       <Footer />
     </div>

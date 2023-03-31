@@ -25,7 +25,7 @@ const iconproperties = {
 const Footer = () => {
     return (<motion.footer className={s.footerDIV}
         initial={{opacity: 0}}
-        transition={{delay:0, stiffness:0, duration:0.8}}
+        transition={{delay:0, stiffness:0, duration:0.5}}
         whileInView={{ opacity: 1}}
         viewport={{once: true}}>
         <div className={s.contactame}>
