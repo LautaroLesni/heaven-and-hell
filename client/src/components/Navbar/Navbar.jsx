@@ -9,7 +9,7 @@ import { useCustomSelector, useCustomDispatch } from "../../hooks/hooks";
 import { setToken } from "../../redux/slices/user";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const NavBar = () => {
     const { token } = useCustomSelector((state) => state.user)
@@ -39,7 +39,7 @@ const NavBar = () => {
                 <Link to='/'><img src={heavenandhell} alt="heaven_and_hell" className="heavenlogo" /></Link>
                 <ul className="navbarIcons">
                     <a href="https://www.facebook.com/luis.lesniewicz" target='_blank' rel="noreferrer noopener"><li><FacebookIcon color="primary" sx={iconproperties} /></li></a>
-                    <a href='https://twitter.com/LesniewiczLuis' target='_blank' rel="noreferrer noopener"><li><TwitterIcon color="primary" sx={iconproperties} /></li></a>
+                    <a href='https://api.whatsapp.com/send?phone=541140412135&text=Hola!%20Te%20contacto%20a%20trav%C3%A9s%20de%20la%20pagina%20web%20de%20Heaven%20and%20Hell' target='_blank' rel="noreferrer noopener"><li><WhatsAppIcon sx={iconproperties}/></li></a>
                     <a href='https://www.instagram.com/heaven_hell_producciones/' target='_blank' rel="noreferrer noopener"><li><InstagramIcon color="primary" sx={iconproperties} /></li></a>
                 </ul>
             </div>
