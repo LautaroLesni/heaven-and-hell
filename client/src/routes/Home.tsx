@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../components/Navbar/Navbar';
 import { motion } from 'framer-motion';
-import Caroussel from '../components/Carousel/Carousel'
+import Caroussel from '../components/Home/Carousel/Carousel'
 import s from './Home.module.css'
 import Proposito from '../components/Home/Proposito';
 import HomeNews from '../components/Home/HomeNews';

@@ -1,0 +1,33 @@
+.OutterDIV{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.OutterDIV h1{
+    font-family: 'Bebas Neue', cursive;
+    border-top: 2px solid rgb(99, 1, 1);
+    border-bottom: 2px solid rgb(99, 1, 1);
+    text-shadow: 40px solid black;
+    background-color: rgb(5, 5, 5);
+    color: rgb(99, 1, 1);
+    width: 100%;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 20px;
+}
+.TextDIV{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-left: 1px solid rgb(99, 1, 1);
+    border-right: 1px solid rgb(99, 1, 1);
+}
+.TextDIV p{
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color: rgb(216, 216, 216);
+}
