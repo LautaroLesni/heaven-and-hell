@@ -11,6 +11,7 @@ import DashboardCategories from './routes/DashboardCategories';
 import DashboardProducts from './routes/DashboardProducts';
 import DashboardRedirect from './components/AdminProtector/DashboardRedirect';
 import About from './routes/About';
+import Contact from './routes/Contact';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/products' element={<Catalog />}></Route>
         <Route path='/products/:id' element={<SpecificProduct />}></Route>
         <Route path='/about' element={<About />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
         <Route path='/dashboard' element={<DashboardRedirect></DashboardRedirect>}></Route>
         <Route path='/dashboard/home' element={<ProtectedAdmin><Dashboard /></ProtectedAdmin>}></Route>
         <Route path='/dashboard/products' element={<ProtectedAdmin><DashboardProducts /></ProtectedAdmin>}></Route>

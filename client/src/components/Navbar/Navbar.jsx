@@ -55,7 +55,7 @@ const NavBar = () => {
                         <Link to='/about'><h4>Sobre Nosotros</h4></Link>
                     </li>
                     <li>
-                        <Link to='/'><h4>Contacto</h4></Link>
+                        <Link to='/contact'><h4>Contacto</h4></Link>
                     </li>
                 </ul> :
                 <ul className={hamburger ? "nav-menu active" : "nav-menu"}>
@@ -69,7 +69,7 @@ const NavBar = () => {
                         <Link to='/about'><h4>Sobre Nosotros</h4></Link>
                     </li>
                     <li>
-                        <Link to='/'><h4>Contacto</h4></Link>
+                        <Link to='/contact'><h4>Contacto</h4></Link>
                     </li>
                     <li>
                         <Link to='/dashboard/home' className="dashboardbutton"><h4>Dashboard</h4></Link>

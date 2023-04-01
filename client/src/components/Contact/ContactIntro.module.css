@@ -1,10 +1,9 @@
 .OutterDIV{
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .OutterDIV h1{
     font-family: 'Bebas Neue', cursive;
@@ -18,20 +17,21 @@
     text-align: center;
     margin-top: 20px;
 }
-.TextDIV{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    background-color: #090909;
-    border-radius: 0px 0px 10px 10px;
-    padding-bottom: 10px;
-}
-.TextDIV p{
-    width: 90%;
-    margin-top: 20px;
+.OutterDIV h5{
+    margin-top: 30px;
+    color: white;
+    font-weight: 300;
+    font-size: 22px;
+    text-align: center;
     padding: 10px;
-    font-size: 20px;
-    color: rgb(216, 216, 216);
+}
+.iconsDIV{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+.alignIconsAndText{
+    display:'flex';
+    flex-direction:'row';
 }
