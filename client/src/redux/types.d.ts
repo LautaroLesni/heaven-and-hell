@@ -7,6 +7,10 @@ id:number | null
 name:string | null
 description:string | null
 img:string | null
+width: string | null
+weigth: string | null
+height: string | null
+materials: string | null
 createdAt:string | null
 categories:Categories[] | null
 }
