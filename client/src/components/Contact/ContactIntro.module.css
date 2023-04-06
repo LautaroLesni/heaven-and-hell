@@ -32,6 +32,16 @@
     gap: 50px;
 }
 .alignIconsAndText{
-    display:'flex';
-    flex-direction:'row';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.alignIconsAndText a{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+}
+.alignIconsAndText h5{
+    width: 80%;
 }

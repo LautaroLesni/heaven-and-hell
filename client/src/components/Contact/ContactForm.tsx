@@ -5,6 +5,8 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import s from './ContactForm.module.css'
+import { motion } from 'framer-motion';
+
 const outterBox = {
     width: {
         xs: '95%', // 0
@@ -47,7 +49,11 @@ const theme = createTheme({
 
 const ContactForm = () => {
     return (
-        <div className={s.OutterDIV}>
+        <motion.div className={s.OutterDIV}
+        initial={{ y: 200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 1, stiffness: 0, duration: 0.8 }}
+        viewport={{ once: true }}>
             <ThemeProvider theme={theme}>
             <Box sx={outterBox}>
                 <TextField sx={nameAndMail} id="outlined-basic" label="Nombre"  variant="filled" name='user_name' />
@@ -56,7 +62,7 @@ const ContactForm = () => {
                 <Button variant='outlined' style={{marginTop:'20px', width:'20%'}}>Enviar</Button>
             </Box>
             </ThemeProvider>
-        </div>
+        </motion.div>
     )
 }
 

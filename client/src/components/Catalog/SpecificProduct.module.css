@@ -118,8 +118,18 @@
     margin: 10px 0px;
     width: 80%;
 }
-.WhatsappLink a:link{
+.WhatsappLink{
+    color: white;
     text-decoration: none;
+    background-color: #730606;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.WhatsappLink:hover{
+color: #730606;
+background-color: white;
+transition: 0.3s;
 }
 
 @media screen and (max-width: 1500px) {

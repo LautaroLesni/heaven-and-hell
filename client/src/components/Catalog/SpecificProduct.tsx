@@ -55,7 +55,7 @@ const buttonStyle = {
                                         <li>* Materiales: {product.materials !== '' ? product.materials : 'N/A'}</li>
                                     </ul>
                                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                                        <Button variant="contained" style={buttonStyle}><a href={`https://api.whatsapp.com/send?phone=1157548304&text=Hola!%20%C2%BFComo%20est%C3%A1s?%20Me%20contacto%20porque%20me%20interes%C3%B3%20${product.name},%20que%20acabo%20de%20ver%20en%20el%20siguiente%20link:%20${window.location.href},%20de%20su%20pagina%20web`}className={s.WhatsappLink} style={{display:'flex',justifyContent:'center',alignItems:'center',}}>Consultar <WhatsAppIcon sx={{marginLeft:'4px', position:'relative', top:'-2px'}}/></a></Button>
+                                        <a href={`https://api.whatsapp.com/send?phone=1157548304&text=Hola!%20%C2%BFComo%20est%C3%A1s?%20Me%20contacto%20porque%20me%20interes%C3%B3%20${product.name},%20que%20acabo%20de%20ver%20en%20el%20siguiente%20link:%20${window.location.href},%20de%20su%20pagina%20web`}className={s.WhatsappLink} style={{display:'flex',justifyContent:'center',alignItems:'center',}}>Consultar <WhatsAppIcon sx={{marginLeft:'4px', position:'relative', top:'-2px'}}/></a>
                                     </Box>
                                 </div>
 
