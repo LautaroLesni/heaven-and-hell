@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { hash, compare } from 'bcrypt';
-import { HttpException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt'
+
 
 
 
@@ -15,7 +15,16 @@ export class UsersService {
 
     constructor(@InjectRepository(User) private userRepository: Repository<User>,
     private jwtService: JwtService) { }
+
     async createUser(user: CreateUserDto) {
+        const foundUser = this.userRepository.findOne({
+            where:{
+                username:user.username
+            }
+        })
+        if (foundUser){
+            return new HttpException('Ya existe un usuario con ese nombre', HttpStatus.CONFLICT)
+        }
         const rawPassword = user.password // raw password from body input
         const plainToHash = await hash(rawPassword, 10) // function that hashes password into a complex one
         const hashedPasswordUser = { ...user, password: plainToHash } // using destructuring to insert the hashed password into the new created user

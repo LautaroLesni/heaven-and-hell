@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Category } from './category.entity';
 import { Product } from 'src/products/product.entity';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 @Injectable()
 export class CategoriesService {
@@ -14,6 +15,10 @@ export class CategoriesService {
     ) {}
 
   async createCategory(categoria: CreateCategoryDto) {
+    const categoryFound = this.categoryRepository.findOne({where:{name:categoria.name}})
+    if (categoryFound){
+      return new HttpException('Ya existe esta categoría', HttpStatus.CONFLICT)
+    }
     const newCategory = new Category()
     newCategory.name = categoria.name
     await this.categoryRepository.save(newCategory)

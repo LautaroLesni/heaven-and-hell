@@ -6,7 +6,7 @@ import { Image } from 'src/images/image.entity'
 export class Product{
 @PrimaryGeneratedColumn('uuid')
 id:string
-@Column({unique:true})
+@Column({unique:true, default:''})
 name:string
 @Column({default:''})
 description:string
