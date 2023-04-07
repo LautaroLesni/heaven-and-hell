@@ -15,7 +15,7 @@ export class CategoriesService {
     ) {}
 
   async createCategory(categoria: CreateCategoryDto) {
-    const categoryFound = this.categoryRepository.findOne({where:{name:categoria.name}})
+    const categoryFound = await this.categoryRepository.findOne({where:{name:categoria.name}})
     if (categoryFound){
       return new HttpException('Ya existe esta categoría', HttpStatus.CONFLICT)
     }

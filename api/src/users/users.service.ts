@@ -17,7 +17,7 @@ export class UsersService {
     private jwtService: JwtService) { }
 
     async createUser(user: CreateUserDto) {
-        const foundUser = this.userRepository.findOne({
+        const foundUser = await this.userRepository.findOne({
             where:{
                 username:user.username
             }
