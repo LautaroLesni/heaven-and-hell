@@ -39,6 +39,7 @@
     font-family: 'Bebas Neue', cursive;
     font-size: 22px;
 }
+
 @media screen and (max-width: 600px){
     .iconsDIV{
         width: 80%;

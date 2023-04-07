@@ -12,6 +12,7 @@ type initialProducts = {
     productsByCategories: Products[] | []
     productsByName: Products[] | []
     product: Products | null
+    loadedProducts: boolean
 }
 
 const initialState: initialProducts = {
@@ -20,6 +21,7 @@ const initialState: initialProducts = {
     productsByCategories: [],
     productsByName: [],
     product: null!,
+    loadedProducts:false
 }
 
 const productSlice = createSlice({
@@ -84,12 +86,15 @@ const productSlice = createSlice({
 
             state.products = productosfiltrados
             state.productsByName = filteredNameforState
+        },
+        setLoaded: (state, action: PayloadAction<any>) => {
+            state.loadedProducts = action.payload
         }
     }
 })
 
 export default productSlice.reducer
-export const { setProducts,setProduct, setByCategory, setByName } = productSlice.actions
+export const { setProducts,setProduct, setByCategory, setByName, setLoaded } = productSlice.actions
 
 export const traerProductos = (): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
     try {

@@ -8,7 +8,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import TableBody from '@mui/material/TableBody';
-import TableCell, {tableCellClasses} from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -22,19 +22,20 @@ import TableFooter from '@mui/material/TableFooter';
 import { traerProductos } from "../../redux/slices/products"
 import ProductsModalDelete from "./ProductsModalDelete";
 import ProductsModalEdit from "./ProductsModalEdit";
+import { setLoaded } from "../../redux/slices/products";
 
 interface TablePaginationActionsProps {
-    count: number;
-    page: number;
-    rowsPerPage: number;
-    onPageChange: (
-      event: React.MouseEvent<HTMLButtonElement>,
-      newPage: number,
-    ) => void;
-  }
+  count: number;
+  page: number;
+  rowsPerPage: number;
+  onPageChange: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    newPage: number,
+  ) => void;
+}
 
-  const displayTables = {
-    display: { 
+const displayTables = {
+  display: {
     xs: 'none', // 0
     sm: 'none', // 600
     md: 'none', // 900
@@ -42,123 +43,139 @@ interface TablePaginationActionsProps {
     xl: 'table-cell' // 1536}
   }
 }
-  
-  function TablePaginationActions(props: TablePaginationActionsProps) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-  
-    const handleFirstPageButtonClick = (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) => {
-      onPageChange(event, 0);
-    };
-  
-    const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onPageChange(event, page - 1);
-    };
-  
-    const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onPageChange(event, page + 1);
-    };
-  
-    const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-  
-    return (
-      <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-        <IconButton
-          onClick={handleFirstPageButtonClick}
-          disabled={page === 0}
-          aria-label="first page"
-        >
-          {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-        </IconButton>
-        <IconButton
-          onClick={handleBackButtonClick}
-          disabled={page === 0}
-          aria-label="previous page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-        </IconButton>
-        <IconButton
-          onClick={handleNextButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="next page"
-        >
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-        </IconButton>
-        <IconButton
-          onClick={handleLastPageButtonClick}
-          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-          aria-label="last page"
-        >
-          {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-        </IconButton>
-      </Box>
-    );
-  }
+
+const tableStyle = {
+  width: {
+    xs: '98%', // 0
+    sm: '98%', // 600
+    md: '100%', // 900
+    lg: '90%', // 1200
+    xl: '90%' // 1536}
+  },
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}
+
+function TablePaginationActions(props: TablePaginationActionsProps) {
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
 
 //React Component
 
-const ProductsTable = () =>{
+const ProductsTable = () => {
 
-    const { products } = useCustomSelector((state:any)=> state.products)
-    const dispatch = useCustomDispatch()
-   
-    useEffect(()=>{
-        if (products.length === 0){
-            dispatch(traerProductos())
-        }
-    },[dispatch])
+  const { products } = useCustomSelector((state: any) => state.products)
+  const { loadedProducts } = useCustomSelector((state) => state.products)
+  const dispatch = useCustomDispatch()
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
-  
-    const handleChangePage = (
-      event: React.MouseEvent<HTMLButtonElement> | null,
-      newPage: number,
-    ) => {
-      setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (
-      event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
+  useEffect(() => {
+    if (products.length === 0 && loadedProducts === false) {
+      dispatch(traerProductos())
+      dispatch(setLoaded(true))
+    }
+  }, [dispatch])
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
 
-//MUI Styles
+  //MUI Styles
 
-    const StyledTableCell:any = styled(TableCell)(({ theme }) => ({
-        [`&.${tableCellClasses.head}`]: {
-          backgroundColor: theme.palette.common.black,
-          color: theme.palette.common.white,
-        },
-        [`&.${tableCellClasses.body}`]: {
-          fontSize: 14,
-        },
-      }));
-      
-      const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-        // hide last border
-        '&:last-child td, &:last-child th': {
-          border: 0,
-        },
-      }));
-    return (
-        <TableContainer component={Paper}
-        style={{display:'flex', flexDirection:'column', alignItems:'center', width:'100%'}}>        
-                <h1 className={s.title}>Products</h1> 
+  const StyledTableCell: any = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  return (
+    products.lenght === 0 && loadedProducts === false ? <h1>Cargando...</h1> : products.length === 0 && loadedProducts === true ?
+      <h1 style={{textAlign:'center'}}>No se encontraron productos en la base de datos</h1> : <TableContainer component={Paper}
+        sx={tableStyle}>
+        <h1 className={s.title}>Products</h1>
         <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
           <TableHead>
             <StyledTableRow>
@@ -173,35 +190,35 @@ const ProductsTable = () =>{
             {(rowsPerPage > 0
               ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : products
-            ).map((products:any) => (
+            ).map((products: any) => (
               <StyledTableRow key={products.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <StyledTableCell sx={displayTables} component="th" scope="row">
                   {products.id}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {products.name.length > 20 ? `${products.name.slice(0,20)}...` : `${products.name}`}
+                  {products.name.length > 20 ? `${products.name.slice(0, 20)}...` : `${products.name}`}
                 </StyledTableCell>
                 <StyledTableCell sx={displayTables} align="left">
                   {products.createdAt}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                    <a href={products.img} target='_blank' rel="noreferrer noopener">{products.img.slice(0,30)}</a>
+                  <a href={products.img} target='_blank' rel="noreferrer noopener">{products.img.slice(0, 30)}</a>
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  <div style={{display:'flex'}}>
-                <ProductsModalEdit
-                id={products.id} 
-                name={products.name} 
-                description={products.description} 
-                img={products.img}
-                height={products.height}
-                width={products.width}
-                weigth={products.weigth}
-                materials={products.materials}
-                categorias={products.categories}
-                />
-                  <ProductsModalDelete
-                  id={products.id.toString()}/>
+                  <div style={{ display: 'flex' }}>
+                    <ProductsModalEdit
+                      id={products.id}
+                      name={products.name}
+                      description={products.description}
+                      img={products.img}
+                      height={products.height}
+                      width={products.width}
+                      weigth={products.weigth}
+                      materials={products.materials}
+                      categorias={products.categories}
+                    />
+                    <ProductsModalDelete
+                      id={products.id.toString()} />
                   </div>
                 </StyledTableCell>
               </StyledTableRow>
@@ -215,7 +232,7 @@ const ProductsTable = () =>{
           <TableFooter>
             <StyledTableRow>
               <TablePagination
-                style={{backgroundColor:'#ffffff'}}
+                style={{ backgroundColor: '#ffffff' }}
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={5}
                 count={products.length}
@@ -235,7 +252,7 @@ const ProductsTable = () =>{
           </TableFooter>
         </Table>
       </TableContainer>
-    )
+  )
 }
 
 export default ProductsTable

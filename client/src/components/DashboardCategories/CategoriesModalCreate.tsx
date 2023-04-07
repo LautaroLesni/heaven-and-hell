@@ -63,7 +63,7 @@ const CategoriesModalCreate = () => {
     
     return (
         <div>
-            <Button onClick={handleModalOpen} style={{ marginTop: 10, color: 'white' }} type='submit' variant='contained' color='primary'>Crear categoría</Button>
+            <Button onClick={handleModalOpen} style={{ marginTop: 40, color: 'white' }} type='submit' variant='contained' color='primary'>Crear categoría</Button>
             <Modal
                 style={{ overflow: 'scroll' }}
                 open={modal}

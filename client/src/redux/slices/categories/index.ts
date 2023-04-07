@@ -6,10 +6,12 @@ import { setToken } from "../user";
 
 type initialCategories = {
     categories: Products[] | null
+    loadedCategories: boolean
 }
 
 const initialState:initialCategories = {
-    categories: []
+    categories: [],
+    loadedCategories:false
 }
 
 const categoriesSlice = createSlice({
@@ -18,12 +20,15 @@ const categoriesSlice = createSlice({
     reducers:{
         setCategories: (state, action:PayloadAction<any>) => {
             state.categories = action.payload
+        },
+        setLoadedCategories: (state, action:PayloadAction<any>) => {
+            state.loadedCategories = action.payload
         }
     }
 })
 
 export default categoriesSlice.reducer
-export const { setCategories } = categoriesSlice.actions
+export const { setCategories, setLoadedCategories } = categoriesSlice.actions
 
 export const traerCategorias = (): Thunk => async (dispatch): Promise<AxiosResponse | AxiosError> => {
     try{
