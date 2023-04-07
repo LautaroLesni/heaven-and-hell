@@ -52,7 +52,7 @@ const ContactForm = () => {
         <motion.div className={s.OutterDIV}
         initial={{ y: 200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1, stiffness: 0, duration: 0.8 }}
+        transition={{ delay: 0.5, stiffness: 0, duration: 0.8 }}
         viewport={{ once: true }}>
             <ThemeProvider theme={theme}>
             <Box sx={outterBox}>

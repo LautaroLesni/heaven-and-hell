@@ -66,3 +66,8 @@
     margin: 10px;
 }
 }
+@media screen and (max-width: 600px) {
+    .propositoDIV{
+        width: 95%;
+    }
+}

@@ -10,6 +10,7 @@
     border-top: 2px solid rgb(99, 1, 1);
     border-bottom: 2px solid rgb(99, 1, 1);
     text-shadow: 40px solid black;
+    font-weight: 400;
     background-color: rgb(5, 5, 5);
     color: rgb(99, 1, 1);
     width: 100%;
@@ -44,4 +45,11 @@
 }
 .alignIconsAndText h5{
     width: 80%;
+}
+
+@media screen and (max-width: 600px) {
+    .OutterDIV h1{
+        font-size: 80px;
+        font-weight: 400;
+    }
 }
