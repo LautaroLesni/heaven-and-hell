@@ -13,8 +13,10 @@ function DashboardCategories() {
       <div className='orientarDashboard'>
         <DashboardNavbar />
         <div className='orientarDashboardStuff'>
+        <div className='RightsideDashboard'>
           <CategoriesModalCreate />
           <CategoriesTable />
+          </div>
         </div>
       </div>
     </div>
