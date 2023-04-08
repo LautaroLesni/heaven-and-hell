@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import userSlice from './slices/user'
+import newsSlice from './slices/news'
 import productSlice from './slices/products'
 import categoriesSlice from './slices/categories'
 import { persistStore, persistReducer } from 'redux-persist'
@@ -17,7 +18,8 @@ export const store = configureStore({
   reducer: {
       user: persistReducer<ReturnType<typeof userSlice>>(userPersistConfig, userSlice),
       products: productSlice,
-      categories: categoriesSlice
+      categories: categoriesSlice,
+      news: newsSlice
   },
   middleware: (defaultMiddleware) => defaultMiddleware({
     serializableCheck:false

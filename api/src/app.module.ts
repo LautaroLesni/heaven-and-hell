@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ImagesModule } from './images/images.module';
 import { ConfigModule } from '@nestjs/config';
+import { NewsModule } from './news/news.module';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { ConfigModule } from '@nestjs/config';
     entities:[__dirname + '/**/*.entity{.ts,.js}'],
     synchronize:true
   })
-  , UsersModule, ProductsModule, CategoriesModule, ImagesModule],
+  , UsersModule, ProductsModule, CategoriesModule, ImagesModule, NewsModule],
   controllers: [AppController],
   providers: [AppService],
 })

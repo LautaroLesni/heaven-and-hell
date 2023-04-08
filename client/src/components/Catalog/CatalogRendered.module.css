@@ -18,10 +18,11 @@ flex-direction: column;
     font-family: 'Bebas Neue', cursive;
     text-align: center;
     font-weight: 300;
+    height: 100vh;
 }
 @media screen and (max-width: 1040px) {
     .catalogDIV{
         width: 95%;
-        height: 100vh;
+        height: 100%;
     }
 }

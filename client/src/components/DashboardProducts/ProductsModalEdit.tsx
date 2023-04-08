@@ -17,6 +17,7 @@ import s from './ProductsModalCreate.module.css'
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import axios from '../../utils/axiosconfig'
+import { setLoadedCategories } from '../../redux/slices/categories';
 
 /* img,description,height,width,weight,materials,categories */
 interface CreateForm {
@@ -42,6 +43,7 @@ const ProductsModalEdit = ({id,name,description,img,height,width,weigth,material
         categories: categorias
     }
     const { categories } = useCustomSelector((state) => state.categories)
+    const { loadedCategories } = useCustomSelector((state) => state.categories)
     const { token } = useCustomSelector((state) => state.user)
     const dispatch = useCustomDispatch()
     const [edit, setModal] = useState(false);
@@ -170,8 +172,9 @@ const ProductsModalEdit = ({id,name,description,img,height,width,weigth,material
     }
 
     useEffect(() => {
-        if (categories!.length === 0) {
+        if (categories!.length === 0 && loadedCategories === false) {
             dispatch(traerCategorias())
+            dispatch(setLoadedCategories(true))
         }
     }, [])
     return (
