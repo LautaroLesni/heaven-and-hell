@@ -14,6 +14,13 @@ materials: string | null
 createdAt:string | null
 categories:Categories[] | null
 }
+interface Noticias{
+    id:string | null
+    title:string | null
+    description:string | null
+    link:string | null
+    img:string | null
+}
 interface User{
     id:number | null
     username:string | null
